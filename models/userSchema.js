@@ -19,25 +19,19 @@ const userSchema = new Schema({
         required: true
     },
     address: {
-        type: String,
-        
+        type: String,  
     },
     city: {
-        type: String,
-        
+        type: String,   
     },
     postcode: {
         type: String,
-        
     },
-    
     divison: {
         type: String,
-        
     },
     district: {
-        type: String,
-        
+        type: String,  
     },
     password: {
         type: String,
