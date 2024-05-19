@@ -5,6 +5,10 @@ require('dotenv').config()
 
 dbConnection()
 
+app.post('/registration', (req,res)=>{
+  const {fristname, lastname, email, telephone, address, city, postcode, divison, district, password} = req.body
+})
+
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
