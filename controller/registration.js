@@ -3,7 +3,7 @@ const UserList = require('../models/userSchema')
 const bcrypt = require('bcrypt');
 
 
-function registration(req, res) {
+async function registration(req, res) {
     const { fristname, lastname, email, telephone, address, city, postcode, divison, district, password } = req.body
     console.log(req.body);
 
@@ -24,6 +24,9 @@ function registration(req, res) {
     if (!password) {
         return res.send({ error: 'Password is required' })
     }
+
+    const existingEmail = await UserList.findOne({email})
+
 
     bcrypt.hash(password, 10, function (err, hash) {
         const users = new UserList({
