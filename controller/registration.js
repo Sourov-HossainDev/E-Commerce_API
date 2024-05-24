@@ -26,7 +26,9 @@ async function registration(req, res) {
     }
 
     const existingEmail = await UserList.findOne({email})
-
+    if(existingEmail){
+        return res.send({error: 'This email is already used'})
+    }
 
     bcrypt.hash(password, 10, function (err, hash) {
         const users = new UserList({
