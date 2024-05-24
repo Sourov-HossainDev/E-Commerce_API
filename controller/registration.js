@@ -1,3 +1,4 @@
+const emailValidation = require('../helpers/emailValidation');
 const sendEmail = require('../helpers/sendEmail');
 const UserList = require('../models/userSchema')
 const bcrypt = require('bcrypt');
@@ -16,7 +17,9 @@ async function registration(req, res) {
     if (!email) {
         return res.send({ error: 'Email is required' })
     }
-
+    if(!emailValidation(email)){
+        return res.json({error: 'Email is not valid'})
+    }
 
     if (!telephone) {
         return res.send({ error: 'Telephone is required' })
