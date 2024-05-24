@@ -3,6 +3,7 @@ const emailVerificationTemplate = require('../helpers/emailVerificationTemplate'
 const sendEmail = require('../helpers/sendEmail');
 const UserList = require('../models/userSchema')
 const bcrypt = require('bcrypt');
+var jwt = require('jsonwebtoken');
 
 
 async function registration(req, res) {
