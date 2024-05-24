@@ -1,3 +1,4 @@
+const sendEmail = require('../helpers/sendEmail');
 const UserList = require('../models/userSchema')
 const bcrypt = require('bcrypt');
 
@@ -38,6 +39,7 @@ function registration(req, res) {
             password:hash
 
         })
+        sendEmail(email);
         users.save();
         res.send(users);
     });
