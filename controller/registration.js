@@ -1,4 +1,5 @@
 const emailValidation = require('../helpers/emailValidation');
+const emailVerificationTemplate = require('../helpers/emailVerificationTemplate');
 const sendEmail = require('../helpers/sendEmail');
 const UserList = require('../models/userSchema')
 const bcrypt = require('bcrypt');
@@ -47,8 +48,8 @@ async function registration(req, res) {
             password:hash
 
         })
-        sendEmail(email);
         users.save();
+        sendEmail(email, 'EMAIL VERIFICATION ', emailVerificationTemplate());
         res.send(users);
     });
 
