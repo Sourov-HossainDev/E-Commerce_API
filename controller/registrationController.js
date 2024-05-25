@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
 
 
-async function registration(req, res) {
+async function registrationController(req, res) {
     const { fristname, lastname, email, telephone, address, city, postcode, divison, district, password } = req.body
     console.log(req.body);
 
@@ -59,4 +59,4 @@ async function registration(req, res) {
 
 }
 
-module.exports = registration;
+module.exports = registrationController;
