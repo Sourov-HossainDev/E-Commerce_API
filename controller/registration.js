@@ -50,7 +50,8 @@ async function registration(req, res) {
 
         })
         users.save();
-        sendEmail(email, 'EMAIL VERIFICATION ', emailVerificationTemplate());
+        var token = jwt.sign({email}, process.env.TOKEN_SECREAT);
+        sendEmail(email, 'EMAIL VERIFICATION ', emailVerificationTemplate(token));
         res.send(users);
     });
 
