@@ -42,7 +42,7 @@ async function categoryStatusController(req,res){
 // Sub Category -->
 
 async function createSubCategoryController(req,res){
-    const {name,description} = req.body;
+    const {name,description, category} = req.body;
  
     // res.send(name);
     const duplicateCategory = await subCategoryList.find({name})
@@ -52,10 +52,32 @@ async function createSubCategoryController(req,res){
 
     const subCategory = new subCategoryList({
         name,
-        description
+        description,
+        category
     })
     res.json({success: "subCategory create successfully"})
     subCategory.save(); 
 }
 
-module.exports = {createCategoryController, categoryStatusController, createSubCategoryController};
+async function subCategoryStatusController(req,res){
+    const {name,status} = req.body;
+    
+
+    if(status == 'rejected' || status == 'waiting'){
+        const updatecategory = await CategoryList.findOneAndUpdate(
+            {name},
+            {$set:  {isActive: false, status: status}},
+            {new: true}
+        )
+       
+    }else if(status == 'approved'){
+        const updatecategory = await CategoryList.findOneAndUpdate(
+            {name},
+            {$set: {isActive: true, status: status}},
+            {new: true}
+        )
+    }
+    res.json({success: "Status updated"})
+}
+
+module.exports = {createCategoryController, categoryStatusController, createSubCategoryController, subCategoryStatusController};
