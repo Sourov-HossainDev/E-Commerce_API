@@ -92,5 +92,11 @@ async function getAllCategory(req,res){
     const data = await CategoryList.find({}).populate("subCategory")
     res.json(data)
 } 
+// Get all sub category 
 
-module.exports = { createCategoryController, categoryStatusController, createSubCategoryController, subCategoryStatusController, getAllCategory };
+async function getSubAllCategory(req,res){
+    const data = await subCategoryList.find({})
+    res.json(data)
+} 
+
+module.exports = { createCategoryController, categoryStatusController, createSubCategoryController, subCategoryStatusController, getAllCategory, getSubAllCategory};
