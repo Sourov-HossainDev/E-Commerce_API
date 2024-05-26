@@ -64,14 +64,14 @@ async function subCategoryStatusController(req,res){
     
 
     if(status == 'rejected' || status == 'waiting'){
-        const updatecategory = await CategoryList.findOneAndUpdate(
+        const updatecategory = await subCategoryList.findOneAndUpdate(
             {name},
             {$set:  {isActive: false, status: status}},
             {new: true}
         )
        
     }else if(status == 'approved'){
-        const updatecategory = await CategoryList.findOneAndUpdate(
+        const updatecategory = await subCategoryList.findOneAndUpdate(
             {name},
             {$set: {isActive: true, status: status}},
             {new: true}
