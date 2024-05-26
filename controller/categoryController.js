@@ -88,8 +88,9 @@ async function subCategoryStatusController(req, res) {
 
 // Get all category 
 
- function getAllCategory(){
-    console.log('ami getallcategory');
+async function getAllCategory(req,res){
+    const data = await CategoryList.find({}).populate("subCategory")
+    res.json(data)
 } 
 
 module.exports = { createCategoryController, categoryStatusController, createSubCategoryController, subCategoryStatusController, getAllCategory };
