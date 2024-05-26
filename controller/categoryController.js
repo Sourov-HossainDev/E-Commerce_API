@@ -1,4 +1,5 @@
 const CategoryList = require("../models/categorySchema");
+const subCategoryList = require("../models/subCategorySchema");
 
 async function createCategoryController(req,res){
     const {name,description} = req.body;
@@ -44,17 +45,17 @@ async function createSubCategoryController(req,res){
     const {name,description} = req.body;
  
     // res.send(name);
-    const duplicateCategory = await CategoryList.find({name})
+    const duplicateCategory = await subCategoryList.find({name})
     if(duplicateCategory.length > 0){
         res.json({error: 'This category already exist, Try agin'})
     }
 
-    const category = new CategoryList({
+    const subCategory = new subCategoryList({
         name,
         description
     })
-    res.json({success: "Category create successfully"})
-    category.save(); 
+    res.json({success: "subCategory create successfully"})
+    subCategory.save(); 
 }
 
 module.exports = {createCategoryController, categoryStatusController, createSubCategoryController};
