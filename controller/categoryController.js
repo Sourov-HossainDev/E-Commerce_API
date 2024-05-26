@@ -19,21 +19,23 @@ async function createCategoryController(req,res){
 
 async function categoryStatusController(req,res){
     const {name,status} = req.body;
-    res.json(status)
+    
 
     if(status == 'rejected' || status == 'waiting'){
         const updatecategory = await CategoryList.findOneAndUpdate(
             {name},
-            {isActive: false, status: status},
+            {$set:  {isActive: false, status: status}},
             {new: true}
         )
+       
     }else if(status == 'approved'){
         const updatecategory = await CategoryList.findOneAndUpdate(
             {name},
-            {isActive: true, status: status},
+            {$set: {isActive: true, status: status}},
             {new: true}
         )
     }
+    res.json({success: "Status updated"})
 }
     
 module.exports = {createCategoryController, categoryStatusController};
