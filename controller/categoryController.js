@@ -1,53 +1,53 @@
 const CategoryList = require("../models/categorySchema");
 const subCategoryList = require("../models/subCategorySchema");
 
-async function createCategoryController(req,res){
-    const {name,description} = req.body;
- 
+async function createCategoryController(req, res) {
+    const { name, description } = req.body;
+
     // res.send(name);
-    const duplicateCategory = await CategoryList.find({name})
-    if(duplicateCategory.length > 0){
-        res.json({error: 'This category already exist, Try agin'})
+    const duplicateCategory = await CategoryList.find({ name })
+    if (duplicateCategory.length > 0) {
+        res.json({ error: 'This category already exist, Try agin' })
     }
 
     const category = new CategoryList({
         name,
         description
     })
-    res.json({success: "Category create successfully"})
-    category.save(); 
+    res.json({ success: "Category create successfully" })
+    category.save();
 }
 
-async function categoryStatusController(req,res){
-    const {name,status} = req.body;
-    
+async function categoryStatusController(req, res) {
+    const { name, status } = req.body;
 
-    if(status == 'rejected' || status == 'waiting'){
+
+    if (status == 'rejected' || status == 'waiting') {
         const updatecategory = await CategoryList.findOneAndUpdate(
-            {name},
-            {$set:  {isActive: false, status: status}},
-            {new: true}
+            { name },
+            { $set: { isActive: false, status: status } },
+            { new: true }
         )
-       
-    }else if(status == 'approved'){
+
+    } else if (status == 'approved') {
         const updatecategory = await CategoryList.findOneAndUpdate(
-            {name},
-            {$set: {isActive: true, status: status}},
-            {new: true}
+            { name },
+            { $set: { isActive: true, status: status } },
+            { new: true }
         )
     }
-    res.json({success: "Status updated"})
+    res.json({ success: "Status updated" })
 }
 
 // Sub Category -->
 
-async function createSubCategoryController(req,res){
-    const {name,description, category} = req.body;
- 
+async function createSubCategoryController(req, res) {
+    const { name, description, category } = req.body;
+
     // res.send(name);
-    const duplicateCategory = await subCategoryList.find({name})
-    if(duplicateCategory.length > 0){
-        res.json({error: 'This category already exist, Try agin'})
+    const duplicateCategory = await subCategoryList.find({ name })
+    if (duplicateCategory.length > 0) {
+        res.json({ error: 'This category already exist, Try agin' })
     }
 
     const subCategory = new subCategoryList({
@@ -56,34 +56,40 @@ async function createSubCategoryController(req,res){
         category
     })
     // copy category controller
-    const updatecategory = await CategoryList.findOneAndUpdate(
-        {_id: subCategory.category},
-        {$push: {subCategory: subCategory._id}},
-        {new: true}
+    await CategoryList.findOneAndUpdate(
+        { _id: subCategory.category },
+        { $push: { subCategory: subCategory._id } },
+        { new: true }
     )
-    res.json({success: "subCategory create successfully"})
-    subCategory.save(); 
+    res.json({ success: "subCategory create successfully" })
+    subCategory.save();
 }
 
-async function subCategoryStatusController(req,res){
-    const {name,status} = req.body;
-    
+async function subCategoryStatusController(req, res) {
+    const { name, status } = req.body;
 
-    if(status == 'rejected' || status == 'waiting'){
+
+    if (status == 'rejected' || status == 'waiting') {
         const updatecategory = await subCategoryList.findOneAndUpdate(
-            {name},
-            {$set:  {isActive: false, status: status}},
-            {new: true}
+            { name },
+            { $set: { isActive: false, status: status } },
+            { new: true }
         )
-       
-    }else if(status == 'approved'){
+
+    } else if (status == 'approved') {
         const updatecategory = await subCategoryList.findOneAndUpdate(
-            {name},
-            {$set: {isActive: true, status: status}},
-            {new: true}
+            { name },
+            { $set: { isActive: true, status: status } },
+            { new: true }
         )
     }
-    res.json({success: "Status updated"})
+    res.json({ success: "Status updated" })
 }
 
-module.exports = {createCategoryController, categoryStatusController, createSubCategoryController, subCategoryStatusController};
+// Get all category 
+
+ function getAllCategory(){
+    console.log('ami getallcategory');
+} 
+
+module.exports = { createCategoryController, categoryStatusController, createSubCategoryController, subCategoryStatusController, getAllCategory };
