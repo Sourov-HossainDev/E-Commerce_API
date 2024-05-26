@@ -16,5 +16,10 @@ async function createCategoryController(req,res){
     res.json({success: "Category create successfully"})
     category.save(); 
 }
-   
-module.exports = createCategoryController;
+
+function categoryStatusController(req,res){
+    const {name,status} = req.body;
+    res.json(status)
+}
+    
+module.exports = {createCategoryController, categoryStatusController};
