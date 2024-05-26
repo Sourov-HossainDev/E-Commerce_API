@@ -55,6 +55,12 @@ async function createSubCategoryController(req,res){
         description,
         category
     })
+    // copy category controller
+    const updatecategory = await CategoryList.findOneAndUpdate(
+        {_id: subCategory.category},
+        {$push: {subCategory: subCategory._id}},
+        {new: true}
+    )
     res.json({success: "subCategory create successfully"})
     subCategory.save(); 
 }
