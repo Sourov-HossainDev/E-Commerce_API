@@ -7,6 +7,6 @@ router.post('/createCategory', createCategoryController)
 router.post('/statusCategory', categoryStatusController)
 router.post('/createSubCategory', createSubCategoryController)
 router.post('/statusSubCategory', subCategoryStatusController) 
-router.post('/getallcategory', getAllCategory) 
+router.get('/getallcategory', getAllCategory) 
 
 module.exports = router;
