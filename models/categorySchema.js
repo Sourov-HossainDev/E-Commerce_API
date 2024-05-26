@@ -16,11 +16,12 @@ const categorySchema = new Schema({
         default: 'waiting',
 
     },
-    // subCategory:[
-    //     {
-    //         type
-    //     }
-    // ],
+    subCategory:[
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'SubCategoryList'
+        }
+    ],
     created:{
         type: Date,
         default: new Date(),

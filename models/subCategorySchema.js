@@ -14,7 +14,12 @@ const SubCategorySchema = new Schema({
     status:{
         type: String,
         default: 'waiting',
+        enum: ['waiting', 'rejected', 'approved']
 
+    },
+    category:{
+        type: Schema.Types.ObjectId,
+        ref: 'CategoryList'
     },
     // subCategory:[
     //     {
