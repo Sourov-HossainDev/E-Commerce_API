@@ -29,7 +29,7 @@ async function secureProduct(req,res,next){
 
 }
 
-function createProduct(req,res){
+function createProductController(req,res){
     const {name, description, price, image, store} =req.body;
     console.log(name, description, price, image, store);
     
@@ -57,4 +57,8 @@ function createProduct(req,res){
     res.json({success: "product created successfully"})
 }
 
-module.exports = {secureProduct, createProduct};
+function createVariantController (){
+    console.log('jhhhh');
+} 
+
+module.exports = {secureProduct, createProductController, createVariantController};
