@@ -29,8 +29,6 @@ const categorySchema = new Schema({
     },
     update:{
         type: Date,
-      
-
     },
 
 })

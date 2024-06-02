@@ -1,10 +1,8 @@
+const productSchema = require("../models/productSchema");
 const UserList = require("../models/userSchema")
 
 async function secureProduct(req,res,next){
-    
- 
-
-
+    console.log(req.headers.authorization.split('@'));
     const userid = req.headers.authorization.split('@')[1];
     const password = req.headers.authorization.split('@')[2];
 
@@ -14,7 +12,7 @@ async function secureProduct(req,res,next){
         const user = await UserList.find({_id: userid});
        
         if(user.length > 0){
-            if(password == "BDXfO3£lo527"){
+            if(password == "BDXGHDFIC"){
                 if(user[0].role == "merchant"){
                     next()
                 }
@@ -32,7 +30,19 @@ async function secureProduct(req,res,next){
 }
 
 function createProduct(req,res){
-    res.json({success: "product created"})
+    const {name, description, price, image, store} =req.body;
+    console.log(name, description, price, image, store);
+    
+
+    const product = new productSchema({
+        name, 
+        description,
+        price, 
+        image, 
+        store
+    })
+    product.save()
+    res.json({success: "product created successfully"})
 }
 
 module.exports = {secureProduct, createProduct};
