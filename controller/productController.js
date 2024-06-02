@@ -33,7 +33,19 @@ function createProduct(req,res){
     const {name, description, price, image, store} =req.body;
     console.log(name, description, price, image, store);
     
-
+    if (!name) {
+        return res.send({ error: ' Name is required' })
+    }
+    if (!description) {
+        return res.send({ error: ' Description is required' })
+    }
+    if (!price) {
+        return res.send({ error: ' Price is required' })
+    }
+    if (!image) {
+        return res.send({ error: ' Image is required' })
+    }
+    
     const product = new productSchema({
         name, 
         description,

@@ -18,18 +18,24 @@ const productSchema = new Schema({
         type: String,
         required: true
     },
+    variants:[
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Variant"
+        }
+    ],
     store:{
         type: Schema.Types.ObjectId,
         ref: "Store"
     },
-    // created:{
-    //     type: Date,
-    //     default: new Date(),
+    created:{
+        type: Date,
+        default: new Date(),
 
-    // },
-    // update:{
-    //     type: Date,
-    // },
+    },
+    update:{
+        type: Date,
+    },
 
 })
 
