@@ -1,5 +1,6 @@
 const productSchema = require("../models/productSchema");
-const UserList = require("../models/userSchema")
+const UserList = require("../models/userSchema");
+const variantSchema = require("../models/variantSchema");
 
 async function secureProduct(req,res,next){
     console.log(req.headers.authorization.split('@'));
@@ -57,8 +58,21 @@ function createProductController(req,res){
     res.json({success: "product created successfully"})
 }
 
-function createVariantController (){
-    console.log('jhhhh');
+function createVariantController (req,res){
+    const {name, description, price, quantity} =req.body;
+
+    const variant = new variantSchema({
+        name, 
+        description,
+        price, 
+        quantity
+        
+    })
+    variant.save();
+    productSchema.findOneAndUpdate(
+        {_id: variant._id},
+        {$push: {variants: variant._id}}
+    )
 } 
 
 module.exports = {secureProduct, createProductController, createVariantController};

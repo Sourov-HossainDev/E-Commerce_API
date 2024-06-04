@@ -2,30 +2,30 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const optionSchema = new Schema({
-    name:{
+    name: {
         type: String,
         required: true
     },
-    description:{
+    description: {
         type: String,
         required: true
     },
-    value:[
+    value: [
         {
-            price:{
+            price: {
                 type: String,
                 required: true
             },
             quantity: String,
-    }
-        
+        }
+
     ],
-    created:{
+    created: {
         type: Date,
         default: new Date(),
 
     },
-    update:{
+    update: {
         type: Date,
     },
 
